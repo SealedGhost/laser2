@@ -71,10 +71,10 @@ public class QueryGrade  extends Activity {
             if(action.equals("ReceiveData"))
             {
                 int hitNum = intent.getIntExtra("HitNum", 0);
-                double grade = 0;
+                int ring = intent.getIntExtra("Ring", 0);
                 if( hitNum != 0)
                 {
-                    arrGrade.add("" + grade);
+                    arrGrade.add("" + ring);
                     gradeAdapter.notifyItemInserted(arrGrade.size() - 1);
                 }
             }
