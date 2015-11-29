@@ -30,6 +30,8 @@ public class CommonData  {
     public static int RESUMESTT = 0x03;
     public static int STARTSTT = 0x04;
 
+    public static int RECEIVECMD = 0x01;
+
 
     public static int COMMONTIME = 30 * 1000;
     public static int PROGRESSTIME = 15 * 1000;
@@ -38,4 +40,5 @@ public class CommonData  {
     public static int EXERCISE_TIME = 30*1000;
 
     public static int DetectTime = 10 * 1000;
+
 }

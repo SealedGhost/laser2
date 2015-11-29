@@ -20,7 +20,7 @@
     <application
         android:name=".MyApplication"
         android:allowBackup="true"
-        android:icon="@drawable/ic_launcher"
+        android:icon="@drawable/gun_im"
         android:label="@string/app_name"
         android:screenOrientation="landscape"
         android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
@@ -69,13 +69,17 @@
             android:name="com.CompeteMode.Compete_Mode_Activity"
             android:label="@string/title_activity_compete__mode_"
             android:launchMode="singleTask"
-            android:screenOrientation="landscape">
+            android:screenOrientation="landscape" >
         </activity>
         <activity
             android:name="com.CompeteMode.CompeteSet"
             android:label="@string/title_activity_compete_set"
             android:launchMode="singleTask"
-            android:screenOrientation="landscape">
+            android:screenOrientation="landscape" >
+        </activity>
+        <activity
+            android:name="com.HitMode.QueryGrade"
+            android:label="@string/title_activity_query_grade" >
         </activity>
     </application>
 

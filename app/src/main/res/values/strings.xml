@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">InfraredGun</string>
+    <string name="app_name">LaserGun</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_hiting">Hiting</string>
@@ -24,7 +24,9 @@
     <string name="second">秒</string>
     <string name="hit"> 击中</string>
     <string name="target">靶</string>
+    <string name="ring">环</string>
     <string name="gameset">游戏设置</string>
+    <string name="hitGrade">打靶成绩</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="title_activity_hit_">Hit_Activity</string>
     <string name="title_activity_hit_set_">HitSet_Activity</string>
@@ -47,20 +49,12 @@
         <item>360s</item>
     </string-array>
 
-    <string name ="hitBrief">
-        <p>模式简介\n\n</p>
-        <p>\t\t起倒靶按客户端配置时间间隔自动起倒，被击中则提前倒下并加分。</p>
-    </string>
-    <string name ="competeBrief">
-        <p>模式简介\n\n</p>
-        <p>\t\t起倒靶按照客户端随机命令立起,根据难度设置确定立起持续时间。</p>
-    </string>
-    <string name="exerciseBrief">
-        <p>模式简介\n\n</p>
-        <p>\t\t起倒靶每隔30秒起倒一次。30秒之内被击中会倒下并再次立起，自动起倒时间刷新。\n</p>
-    </string>
+    <string name="hitBrief"><p>模式简介\n\n</p> <p>\t\t起倒靶按客户端配置时间间隔自动起倒，被击中则提前倒下并加分。</p></string>
+    <string name="competeBrief"><p>模式简介\n\n</p> <p>\t\t起倒靶按照客户端随机命令立起,根据难度设置确定立起持续时间。</p></string>
+    <string name="exerciseBrief"><p>模式简介\n\n</p> <p>\t\t起倒靶每隔30秒起倒一次。30秒之内被击中会倒下并再次立起，自动起倒时间刷新。\n</p></string>
     <string name="title_activity_exercise_">Exercise_Activity</string>
     <string name="title_activity_compete__mode_">Compete_Mode_Activity</string>
     <string name="title_activity_compete_set">CompeteSet</string>
+    <string name="title_activity_query_grade">QueryGrade</string>
 
 </resources>

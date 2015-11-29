@@ -32,6 +32,7 @@ public class Compete_Mode_Activity extends Activity {
     private TextView tv_return;
     private TextView tv_start;
     private TextView tv_mode_name;
+    private TextView tv_ring;
     int nRest_time;
     int nFrenquency;
     int nDifficult;
@@ -66,22 +67,22 @@ public class Compete_Mode_Activity extends Activity {
         tv_start = (TextView) findViewById(R.id.tv_compete_start);
         tv_hitnum = (TextView) findViewById(R.id.tv_hit_num);
         tv_mode_name = (TextView) findViewById(R.id.tv_competemodename);
+        tv_ring = (TextView)findViewById(R.id.tv_showring);
         tv_mode_name.setText(strModeName);
-
         nRest_time = PreferenceUtils.getPrefInt(this, PreferenceConstants.GameTime, 0);
 
         isRunning = false;
         isOver = false;
         isActive = true;
 
-        Log.e("nrestime1", "" + nRest_time);
         if (nRest_time == 0) {
             nRest_time = 180;
             PreferenceUtils.setPrefInt(this, PreferenceConstants.GameTime, nRest_time);
         }
         tv_resttime.setText(nRest_time + "");
-        String time = String.valueOf(nRest_time);
-        Log.e("nrestTime", time);
+        tv_hitnum.setText(0 + "");
+        tv_ring.setText("0.0");
+
         myBroadcastReceiver = new MyBroadCastReceiver();
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction("ReceiveData");
@@ -105,6 +106,7 @@ public class Compete_Mode_Activity extends Activity {
                 tv_start.setTextColor(Black);
                 tv_resttime.setText(""+nRest_time);
                 tv_hitnum.setText("" + 0);
+                tv_ring.setText("0.0");
             }
         };
         tv_start.setOnTouchListener(new TouchListener());
@@ -238,9 +240,11 @@ public class Compete_Mode_Activity extends Activity {
             }
             if (action.equals("ReceiveData")) {
                 int hitNum = intent.getIntExtra("HitNum", 0);
+                int nRing = intent.getIntExtra("Ring" ,0);
                 if (hitNum != 0 && isRunning ) {
                     totalHitNum++;
                     tv_hitnum.setText("" + totalHitNum);
+                    tv_ring.setText("" + nRing);
                 }
 
             }

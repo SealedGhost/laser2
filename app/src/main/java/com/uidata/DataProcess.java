@@ -178,14 +178,19 @@ public class DataProcess {
                     );
                     intent = new Intent("CompeteACK");
                     intent.putExtra("TargetExist",iAdress);
+                    MyApplication.getAppContext().sendBroadcast(intent);
                 }
                 else
                 {
-                    Log.e("Hitnum", ""+iAdress);
-                    intent = new Intent("ReceiveData");
-                    intent.putExtra("HitNum", iAdress);
+                    if(iFunc == CommonData.RECEIVECMD) {
+                        iAdress = byteTurnInt(sData[5]);
+                        int nRing = byteTurnInt(sData[6]);
+                        intent = new Intent("ReceiveData");
+                        intent.putExtra("HitNum", iAdress);
+                        intent.putExtra("Ring", nRing);
+                        MyApplication.getAppContext().sendBroadcast(intent);
+                    }
                 }
-                MyApplication.getAppContext().sendBroadcast(intent);
             }
         }
     }

@@ -16,6 +16,10 @@ import android.widget.TextView;
 import com.infraredgun.R;
 import com.uidata.CommonData;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
 public class HitModeActivity extends Activity {
 
 	private TextView tv_start;
@@ -26,6 +30,7 @@ public class HitModeActivity extends Activity {
     private TextView tv_mode;
     private GridLayoutManager gridLayoutManager;
     private RecyclerView recyclerView;
+
     public AdapterRecycler adapterRecycler;
     public String arrhitscores[] = new String[CommonData.TARGETNUM];
     public int arrhitscorenum[] = new int[CommonData.TARGETNUM];
@@ -43,6 +48,8 @@ public class HitModeActivity extends Activity {
     Drawable dwDisable;
     int Gray;
     int Black;
+
+    public static Map<Integer,ArrayList<String>> map = new HashMap<Integer, ArrayList<String>>();
 
     @Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -80,7 +87,7 @@ public class HitModeActivity extends Activity {
         {
             arrhitscores[i] = "0";
         }
-        adapterRecycler = new AdapterRecycler(arrhitscores);
+        adapterRecycler = new AdapterRecycler(this,arrhitscores);
         recyclerView.setAdapter(adapterRecycler);
         TouchListener starttouchListener = new TouchListener(STRAT);
         tv_start.setOnTouchListener(starttouchListener);
@@ -166,11 +173,22 @@ public class HitModeActivity extends Activity {
             if(action.equals("ReceiveData"))
             {
                 int hitNum = intent.getIntExtra("HitNum", 0);
+                int nRing = intent.getIntExtra("Ring", 0);
                 if( hitNum != 0 && hitNum < CommonData.TARGETNUM)
                 {
                     arrhitscorenum[hitNum - 1]++;
                     arrhitscores[hitNum - 1] = ""+arrhitscorenum[hitNum - 1];
                     adapterRecycler.notifyItemChanged(hitNum - 1);
+                    if(!map.containsKey(hitNum))
+                    {
+                        ArrayList<String> arrayList = new ArrayList<String>();
+                        arrayList.add(nRing + "");
+                        map.put(hitNum, arrayList);
+                    }
+                    else
+                    {
+                        map.get(hitNum).add(nRing + "");
+                    }
                 }
             }
         }
@@ -188,5 +206,17 @@ public class HitModeActivity extends Activity {
     {
         super.onDestroy();
         unregisterReceiver(myBroadcastReceiver);
+    }
+    public Map<Integer, ArrayList<String>> getMap()
+    {
+        return map;
+    }
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(resultCode == 1) {
+            int  nHitnum = data.getExtras().getInt("HitPosition");
+            ArrayList<String> arrRing = data.getExtras().getStringArrayList("gradeArrayList");
+            map.remove(nHitnum);
+            map.put(nHitnum, arrRing);
+        }
     }
 }
