@@ -1,8 +1,6 @@
 package com.uidata;
 import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.Intent;
-import android.os.Message;
 import android.util.Log;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -10,7 +8,7 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 import android.os.Handler;
 
-import com.infraredgun.MyApplication;
+import com.laserGun.MyApplication;
 
 public class DataProcess {
 

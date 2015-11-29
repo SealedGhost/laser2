@@ -6,7 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.infraredgun.R;
+import com.laserGun.R;
 
 import java.util.ArrayList;
 /**

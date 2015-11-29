@@ -8,8 +8,8 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
 
-import com.infraredgun.MainActivity;
-import com.infraredgun.R;
+import com.laserGun.MainActivity;
+import com.laserGun.R;
 import com.uidata.PreferenceConstants;
 import com.uidata.PreferenceUtils;
 

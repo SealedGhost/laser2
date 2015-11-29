@@ -6,18 +6,13 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.MotionEvent;
-import android.view.TouchDelegate;
 import android.view.View;
 import android.widget.TextView;
 
-import com.HitMode.HitModeActivity;
-import com.infraredgun.MainActivity;
-import com.infraredgun.R;
+import com.laserGun.MainActivity;
+import com.laserGun.R;
 import com.uidata.CommonData;
-import com.uidata.PreferenceUtils;
 
 public class Compete_Activity extends Activity {
     private TextView tv_commonmode;

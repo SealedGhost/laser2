@@ -5,20 +5,16 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
 
-import com.infraredgun.DetectThread;
-import com.infraredgun.R;
+import com.laserGun.R;
 import com.uidata.CommonData;
 import com.uidata.PreferenceConstants;
 import com.uidata.PreferenceUtils;
@@ -81,7 +77,7 @@ public class Compete_Mode_Activity extends Activity {
         }
         tv_resttime.setText(nRest_time + "");
         tv_hitnum.setText(0 + "");
-        tv_ring.setText("0.0");
+        tv_ring.setText("0");
 
         myBroadcastReceiver = new MyBroadCastReceiver();
         IntentFilter intentFilter = new IntentFilter();
@@ -106,7 +102,7 @@ public class Compete_Mode_Activity extends Activity {
                 tv_start.setTextColor(Black);
                 tv_resttime.setText(""+nRest_time);
                 tv_hitnum.setText("" + 0);
-                tv_ring.setText("0.0");
+                tv_ring.setText("0");
             }
         };
         tv_start.setOnTouchListener(new TouchListener());

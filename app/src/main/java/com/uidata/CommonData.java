@@ -8,7 +8,7 @@ public class CommonData  {
     public static  int TARGETNUM = 50;
     public static boolean isRunning = true;//to control detectThread
     public static WifiAdmin wifiAdmin ;
-    public static String SSID = "For Cs Infrared";
+    public static String SSID = "For Cs Laser";
     public static String PSWD = "1357924680";
 
    //public static String SSID = "a-b";

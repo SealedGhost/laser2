@@ -3,8 +3,6 @@ package com.CompeteMode;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
@@ -12,8 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.infraredgun.R;
-import com.uidata.CommonData;
+import com.laserGun.R;
 import com.uidata.PreferenceConstants;
 import com.uidata.PreferenceUtils;
 

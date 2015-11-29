@@ -13,7 +13,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
 
-import com.infraredgun.R;
+import com.laserGun.R;
 import com.uidata.CommonData;
 
 import java.util.ArrayList;

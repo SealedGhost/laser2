@@ -1,7 +1,7 @@
 package com.uidata;
 
-import com.infraredgun.MyApplication;
-import com.infraredgun.R;
+import com.laserGun.MyApplication;
+import com.laserGun.R;
 
 /**
  * 存储于sharedPreference数据库中的变量名,数据库中存储打靶模式下的各种模式时间
