@@ -51,7 +51,7 @@
 
     <string name="hitBrief"><p>模式简介\n\n</p> <p>\t\t起倒靶按客户端配置时间间隔自动起倒，被击中则提前倒下并加分。</p></string>
     <string name="competeBrief"><p>模式简介\n\n</p> <p>\t\t起倒靶按照客户端随机命令立起,根据难度设置确定立起持续时间。</p></string>
-    <string name="exerciseBrief"><p>模式简介\n\n</p> <p>\t\t起倒靶每隔30秒起倒一次。30秒之内被击中会倒下并再次立起，自动起倒时间刷新。\n</p></string>
+    <string name="exerciseBrief"><p>模式简介\n\n</p> <p>\t\t起倒靶被击中会倒下并再次立起。\n</p></string>
     <string name="title_activity_exercise_">Exercise_Activity</string>
     <string name="title_activity_compete__mode_">Compete_Mode_Activity</string>
     <string name="title_activity_compete_set">CompeteSet</string>
