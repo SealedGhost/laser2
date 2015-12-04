@@ -63,7 +63,7 @@ public class HitModeActivity extends Activity {
         initUI();
         Intent intent = getIntent();
         String strModeName = intent.getStringExtra("ModeName");
-        iTime = intent.getIntExtra("Time", 0);
+        iTime = intent.getIntExtra("Time", 20);
         tv_mode.setText(strModeName);
 
         myBroadcastReceiver = new MyBroadcastReceiver();
@@ -121,7 +121,7 @@ public class HitModeActivity extends Activity {
                 switch (iFunction)
                 {
                     case STRAT:
-                        CommonData.dataProcess.sendCmd(0x00, CommonData.HITCMD, CommonData.STARTSTT, iTime*1000, 0x00);
+                        CommonData.dataProcess.sendCmd(0x00, CommonData.HITCMD, CommonData.STARTSTT, iTime, 0x00);
                         tv_start.setBackground(dwDisable);
                         tv_start.setTextColor(Gray);
                         tv_continue.setBackground(dwPress);
@@ -174,10 +174,11 @@ public class HitModeActivity extends Activity {
             {
                 int hitNum = intent.getIntExtra("HitNum", 0);
                 int nRing = intent.getIntExtra("Ring", 0);
-                if( hitNum != 0 && hitNum < CommonData.TARGETNUM)
+                if(bStart && !bStop &&  hitNum != 0 && hitNum < CommonData.TARGETNUM)
                 {
                     arrhitscorenum[hitNum - 1]++;
                     arrhitscores[hitNum - 1] = ""+arrhitscorenum[hitNum - 1];
+
                     adapterRecycler.notifyItemChanged(hitNum - 1);
                     if(!map.containsKey(hitNum))
                     {

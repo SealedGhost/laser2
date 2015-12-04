@@ -35,13 +35,13 @@ public class Hit_Activity extends Activity {
         tvmode2time =(TextView)findViewById(R.id.tvmode2time);
         tvmode3time =(TextView)findViewById(R.id.tvmode3time);
 
-        tvmode1time.setText(PreferenceUtils.getPrefInt(this,PreferenceConstants.Mode1,30)+"s");
+        tvmode1time.setText(PreferenceUtils.getPrefInt(this,PreferenceConstants.Mode1,20)+"s");
         tvmode2time.setText(PreferenceUtils.getPrefInt(this,PreferenceConstants.Mode2,15)+"s");
         tvmode3time.setText(PreferenceUtils.getPrefInt(this,PreferenceConstants.Mode3,10)+"s");
-        TouchListener touchListener = new TouchListener();
-        tv_mode1.setOnTouchListener(touchListener);
-        tv_mode2.setOnTouchListener(touchListener);
-        tv_mode3.setOnTouchListener(touchListener);
+
+        tv_mode1.setOnTouchListener(new TouchListener(1));
+        tv_mode2.setOnTouchListener(new TouchListener(2));
+        tv_mode3.setOnTouchListener(new TouchListener(3));
         tv_return.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -69,17 +69,39 @@ public class Hit_Activity extends Activity {
     }
     private class TouchListener implements View.OnTouchListener
     {
+        int nMode;
+        private TouchListener(int mode)
+        {
+            nMode = mode;
+        }
         public boolean onTouch(View v, MotionEvent event)
         {
             if(event.getAction() == MotionEvent.ACTION_DOWN)
             {
+
                 Intent intent = new Intent(Hit_Activity.this, HitModeActivity.class);
-                TextView tvView = (TextView)v;
-                String strModeName = tvView.getText().toString();
-                int iTime = PreferenceUtils.getPrefInt(Hit_Activity.this, strModeName, 0);
-                intent.putExtra("ModeName", strModeName);
-                intent.putExtra("Time", iTime);
-                startActivity(intent);
+                int nTime = 20;
+                String strModeName = "";
+                switch(nMode)
+                {
+                    case 1:
+                        nTime = PreferenceUtils.getPrefInt(Hit_Activity.this, PreferenceConstants.Mode1, 20);
+                        strModeName = getResources().getString(R.string.mode1);
+                        break;
+                    case 2:
+                        nTime = PreferenceUtils.getPrefInt(Hit_Activity.this, PreferenceConstants.Mode2, 15);
+                        strModeName = getResources().getString(R.string.mode2);
+                        break;
+                    case 3:
+                        nTime = PreferenceUtils.getPrefInt(Hit_Activity.this, PreferenceConstants.Mode3, 10);
+                        strModeName = getResources().getString(R.string.mode3);
+                        break;
+                }
+                if(strModeName != "") {
+                    intent.putExtra("ModeName", strModeName);
+                    intent.putExtra("Time", nTime);
+                    startActivity(intent);
+                }
             }
             return false;
         }

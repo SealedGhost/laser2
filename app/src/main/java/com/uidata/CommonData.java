@@ -33,7 +33,7 @@ public class CommonData  {
     public static int RECEIVECMD = 0x01;
 
 
-    public static int COMMONTIME = 30 * 1000;
+    public static int COMMONTIME = 15 * 1000;
     public static int PROGRESSTIME = 15 * 1000;
     public static int CHALLENGETIME = 10 *1000;
 

@@ -183,10 +183,15 @@ public class DataProcess {
                     if(iFunc == CommonData.RECEIVECMD) {
                         iAdress = byteTurnInt(sData[5]);
                         int nRing = byteTurnInt(sData[6]);
-                        intent = new Intent("ReceiveData");
-                        intent.putExtra("HitNum", iAdress);
-                        intent.putExtra("Ring", nRing);
-                        MyApplication.getAppContext().sendBroadcast(intent);
+                        if(iAdress != 0) {
+                            intent = new Intent("ReceiveData");
+                            intent.putExtra("HitNum", iAdress);
+                            Log.e("Hirtnum", " " + iAdress);
+                            Log.e("Ring", "" + nRing);
+
+                            intent.putExtra("Ring", nRing);
+                            MyApplication.getAppContext().sendBroadcast(intent);
+                        }
                     }
                 }
             }

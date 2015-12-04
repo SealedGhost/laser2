@@ -6,6 +6,7 @@ import com.uidata.CommonData;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -13,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 public class AdapterRecycler  extends  RecyclerView.Adapter<AdapterRecycler.ViewHolder> {
@@ -39,12 +41,14 @@ public class AdapterRecycler  extends  RecyclerView.Adapter<AdapterRecycler.View
         } else {
             viewHolder.tv_hitnum.setText("" + num);
         }
+        viewHolder.nPosition = position;
         viewHolder.tv_hitscore.setText(hitscores[position]);
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public TextView tv_hitnum;
         public TextView tv_hitscore;
+        public int nPosition;
 
         public ViewHolder(final View view, final int position) {
             super(view);
@@ -54,11 +58,11 @@ public class AdapterRecycler  extends  RecyclerView.Adapter<AdapterRecycler.View
                 public boolean onTouch(View v, MotionEvent event) {
                     if (event.getAction() == MotionEvent.ACTION_DOWN) {
                         HitModeActivity activity = (HitModeActivity) context;
-                        Map<Integer, ArrayList<String>> map = activity.getMap();
-                        if (map != null && map.size() != 0 && map.containsKey(position)) {
+                         Map<Integer, ArrayList<String>> map = activity.getMap();
+                        if (map != null && map.containsKey(nPosition)) {
                             Intent intent = new Intent(activity, QueryGrade.class);
-                            intent.putExtra("HitPosition", position);
-                            intent.putExtra("gradeArrayList", map.get(position));
+                            intent.putExtra("HitPosition", nPosition + 1);
+                            intent.putExtra("gradeArrayList", map.get(nPosition));
                             ((HitModeActivity) context).startActivityForResult(intent, 1);
                         }
                     }

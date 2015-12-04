@@ -19,6 +19,7 @@ import com.uidata.CommonData;
 import com.uidata.PreferenceConstants;
 import com.uidata.PreferenceUtils;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 
@@ -46,6 +47,8 @@ public class Compete_Mode_Activity extends Activity {
     int Gray;
     int Black;
 
+    boolean isHit;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,6 +74,8 @@ public class Compete_Mode_Activity extends Activity {
         isOver = false;
         isActive = true;
 
+        isHit = false;
+
         if (nRest_time == 0) {
             nRest_time = 180;
             PreferenceUtils.setPrefInt(this, PreferenceConstants.GameTime, nRest_time);
@@ -82,11 +87,11 @@ public class Compete_Mode_Activity extends Activity {
         myBroadcastReceiver = new MyBroadCastReceiver();
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction("ReceiveData");
-        intentFilter.addAction("CompeteACK");
+       // intentFilter.addAction("CompeteACK");
         registerReceiver(myBroadcastReceiver, intentFilter);
 
-        DetectTargetThread detectThread = new DetectTargetThread();
-        detectThread.start();
+        //DetectTargetThread detectThread = new DetectTargetThread();
+       // detectThread.start();
 
         timeHandler = new Handler() {
             public void handleMessage(Message msg) {
@@ -144,40 +149,21 @@ public class Compete_Mode_Activity extends Activity {
     class RunThread extends Thread//to produce random number to control target stand
     {
         public void run() {
-            try {
-                Thread.sleep(1000);
-            } catch (Exception e) {
-            }
 
             while (!isOver && isActive) {
                 int nSize = list.size();
-
                 if (nSize != 0) {
-                    switch (nDifficult) {
-                        case 1:
-                        case 2:
-                            int nRandom = (int) (Math.random() * nSize);
-                            int ntarget = (Integer) list.get(nRandom);
-                            int t = nFrenquency + (int) (Math.random() * 11 - 5) * 1000;
-                            Log.e("ntarget", ntarget+"" + t);
-                            CommonData.dataProcess.sendCmd(ntarget, CommonData.COMPETECMD, CommonData.STARTSTT, t, 0x00);
-                            break;
-                        case 3:
-                            int nRandom1 = (int) (Math.random() * nSize);
-                            int nRandom2 = (int) (Math.random() * nSize);
-                            int ntarget1 = (Integer) list.get(nRandom1);
-                            int ntarget2 = (Integer) list.get(nRandom2);
-                            int t1 = nFrenquency + (int) (Math.random() * 11 - 5)*1000;
-                            int t2 = nFrenquency + (int) (Math.random() * 11 - 5)*1000;
-                            CommonData.dataProcess.sendCmd(ntarget1, CommonData.COMPETECMD, CommonData.STARTSTT, t1, 0x00);
-                            CommonData.dataProcess.sendCmd(ntarget2, CommonData.COMPETECMD, CommonData.STARTSTT, t2, 0x00);
-                            break;
-                    }
-                }
+                    CommonData.dataProcess.sendCmd(0x01, CommonData.COMPETECMD, CommonData.STARTSTT, nFrenquency / 1000, 0x00);
+                    int nTime = nFrenquency / 1000 + 1;
+                    isHit = false;
+                    while (nTime > 0 && !isHit) {
+                        try {
+                            Thread.sleep(1000);
+                        } catch (Exception e) {
 
-                try {
-                    Thread.sleep(nFrenquency);
-                } catch (Exception e) {
+                        }
+                        nTime--;
+                    }
                 }
             }
         }
@@ -194,6 +180,7 @@ public class Compete_Mode_Activity extends Activity {
                 if (nRest_time == 2)//let RunThread stop in advance
                 {
                     isOver = true;
+                    isHit = true;
                     CommonData.dataProcess.sendCmd(0x00, CommonData.COMPETECMD, CommonData.STOPSTT, 0x00, 0x00);
                 }
                 Message message = Message.obtain();
@@ -226,23 +213,23 @@ public class Compete_Mode_Activity extends Activity {
     class MyBroadCastReceiver extends BroadcastReceiver {
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
-            if (action.equals("CompeteACK")) {
+           /* if (action.equals("CompeteACK")) {
                 int iTarget = intent.getIntExtra("TargetExist", 0);
                 if (iTarget != 0) {
                     if (!list.contains(iTarget)) {
                         list.add(iTarget);
                     }
                 }
-            }
+            }*/
             if (action.equals("ReceiveData")) {
                 int hitNum = intent.getIntExtra("HitNum", 0);
                 int nRing = intent.getIntExtra("Ring" ,0);
                 if (hitNum != 0 && isRunning ) {
+                    isHit = true;
                     totalHitNum++;
                     tv_hitnum.setText("" + totalHitNum);
                     tv_ring.setText("" + nRing);
                 }
-
             }
         }
     }
@@ -252,6 +239,7 @@ public class Compete_Mode_Activity extends Activity {
             CommonData.dataProcess.sendCmd(0x00, CommonData.COMPETECMD, CommonData.STOPSTT, 0x00, 0x00);
         }
         isActive = false;
+        isHit = true;
         startActivity(new Intent(Compete_Mode_Activity.this, Compete_Activity.class));
         Compete_Mode_Activity.this.finish();
     }

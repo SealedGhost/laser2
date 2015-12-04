@@ -27,7 +27,7 @@ public class MyApplication  extends Application {
         Log.i("MyApplication","start");
 
         if(PreferenceUtils.getPrefInt(this, PreferenceConstants.Mode1,0) == 0)
-            PreferenceUtils.setPrefInt(this, PreferenceConstants.Mode1, 30);
+            PreferenceUtils.setPrefInt(this, PreferenceConstants.Mode1, 20);
 
         if(PreferenceUtils.getPrefInt(this, PreferenceConstants.Mode2,0) == 0)
             PreferenceUtils.setPrefInt(this, PreferenceConstants.Mode2, 15);
