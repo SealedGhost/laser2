@@ -5,7 +5,7 @@ public class CommonData  {
     public static int  PORT =  8899;
    // public static String IP = "192.168.43.1";
     //public static int  PORT =  12345;
-    public static  int TARGETNUM = 50;
+    public static  int TARGETNUM = 25;
     public static boolean isRunning = true;//to control detectThread
     public static WifiAdmin wifiAdmin ;
     public static String SSID = "For Cs Laser";

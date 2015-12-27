@@ -59,16 +59,18 @@ public class Exercise_Activity extends Activity {
         tv_end.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                    if(bStart) {
-                        CommonData.dataProcess.sendCmd(0x00, CommonData.EXERCISECMD, CommonData.STOPSTT, 0x00, 0x00);
+
+                        if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                            if(bStart) {
+                                CommonData.dataProcess.sendCmd(0x00, CommonData.EXERCISECMD, CommonData.STOPSTT, 0x00, 0x00);
+                                tv_start.setTextColor(Black);
+                                tv_start.setBackground(dwPress);
+                            }
+                        }
+                        return false;
                     }
-                    startActivity(new Intent(Exercise_Activity.this, MainActivity.class));
-                    Exercise_Activity.this.finish();
-                }
-                return false;
-            }
-        });
+                });
+
         tv_start.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {

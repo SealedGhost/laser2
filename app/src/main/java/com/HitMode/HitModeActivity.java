@@ -39,6 +39,7 @@ public class HitModeActivity extends Activity {
     final int STOP = 2;
     final int CONTINUE = 3;
     final int RETURN = 4;
+    final int END = 5;
     int iTime = 0;
     boolean bStart = false;
     boolean bStop = false;
@@ -97,15 +98,16 @@ public class HitModeActivity extends Activity {
         tv_continue.setOnTouchListener(continuetouchListener);
         TouchListener returnTouchListener = new TouchListener(RETURN);
         tv_return.setOnTouchListener(returnTouchListener);
-        tv_end.setOnTouchListener(returnTouchListener);
+        TouchListener endListener = new TouchListener(END);
+        tv_end.setOnTouchListener(endListener);
         tv_start.setBackground(dwPress);
         tv_start.setTextColor(Black);
         tv_continue.setBackground(dwDisable);
         tv_continue.setTextColor(Gray);
         tv_stop.setBackground(dwDisable);
         tv_stop.setTextColor(Gray);
-        tv_end.setBackground(dwPress);
-        tv_end.setTextColor(Black);
+        tv_end.setBackground(dwDisable);
+        tv_end.setTextColor(Gray);
 	}
     public class TouchListener implements View.OnTouchListener
     {
@@ -121,15 +123,24 @@ public class HitModeActivity extends Activity {
                 switch (iFunction)
                 {
                     case STRAT:
-                        CommonData.dataProcess.sendCmd(0x00, CommonData.HITCMD, CommonData.STARTSTT, iTime, 0x00);
-                        tv_start.setBackground(dwDisable);
-                        tv_start.setTextColor(Gray);
-                        tv_continue.setBackground(dwPress);
-                        tv_continue.setTextColor(Black);
-                        tv_stop.setBackground(dwPress);
-                        tv_stop.setTextColor(Black);
-                        bStart = true;
-                        break;
+                        if(!bStart) {
+                            for(int i = 0; i < CommonData.TARGETNUM; i++)
+                            {
+                                arrhitscores[i] = "0";
+                            }
+                            adapterRecycler.notifyDataSetChanged();
+                            CommonData.dataProcess.sendCmd(0x00, CommonData.HITCMD, CommonData.STARTSTT, iTime, 0x00);
+                            tv_start.setBackground(dwDisable);
+                            tv_start.setTextColor(Gray);
+                            tv_continue.setBackground(dwPress);
+                            tv_continue.setTextColor(Black);
+                            tv_stop.setBackground(dwDisable);
+                            tv_stop.setTextColor(Gray);
+                            tv_end.setBackground(dwPress);
+                            tv_end.setTextColor(Black);
+                            bStart = true;
+                            break;
+                        }
                     case STOP:
                         if(bStart&&!bStop) {
                             CommonData.dataProcess.sendCmd(0x00, CommonData.HITCMD, CommonData.PAUSESTT, 0x00, 0x00);
@@ -159,6 +170,21 @@ public class HitModeActivity extends Activity {
                         Intent intent = new Intent(HitModeActivity.this, Hit_Activity.class);
                         startActivity(intent);
                         HitModeActivity.this.finish();
+                        break;
+                    case END:
+                        if(bStart)
+                        {
+                            CommonData.dataProcess.sendCmd(0x00, CommonData.HITCMD, CommonData.STOPSTT, 0x00, 0x00);
+                            bStart = false;
+                            tv_start.setBackground(dwPress);
+                            tv_start.setTextColor(Black);
+                            tv_continue.setBackground(dwDisable);
+                            tv_continue.setTextColor(Gray);
+                            tv_stop.setBackground(dwDisable);
+                            tv_stop.setTextColor(Gray);
+                            tv_end.setBackground(dwDisable);
+                            tv_end.setTextColor(Gray);
+                        }
                         break;
                 }
             }

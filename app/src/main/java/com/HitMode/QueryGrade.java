@@ -34,7 +34,7 @@ public class QueryGrade  extends Activity {
         Intent intent = getIntent();
         arrGrade = intent.getStringArrayListExtra("gradeArrayList");
         nHit = intent.getIntExtra("HitPosition", 0);
-        Log.e("arrGradesize", arrGrade.size() + "");
+
         tv_return = (TextView) findViewById(R.id.tv_gradeReturn);
         recyclerView = (RecyclerView) findViewById(R.id.rv_grade);
         gridLayoutManager = new GridLayoutManager(this, 5);
