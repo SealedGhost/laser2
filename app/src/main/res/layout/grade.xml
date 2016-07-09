@@ -15,8 +15,8 @@
         android:textSize="60sp" />
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="160dp"
+        android:layout_height="80dp"
         android:id="@+id/tv_gradeReturn"
         android:layout_alignTop="@+id/textView8"
         android:layout_alignParentEnd="true"

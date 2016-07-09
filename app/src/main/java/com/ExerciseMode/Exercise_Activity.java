@@ -48,7 +48,8 @@ public class Exercise_Activity extends Activity {
                 if(event.getAction() == MotionEvent.ACTION_DOWN)
                 {
                     if(bStart) {
-                        CommonData.dataProcess.sendCmd(0x00, CommonData.EXERCISECMD, CommonData.STOPSTT, 0x00, 0x00);
+//                        CommonData.dataProcess.sendCmd(0x00, CommonData.EXERCISECMD, CommonData.STOPSTT, 0x00, 0x00);
+                        CommonData.dataProcess.sendCmd(0x00, CommonData.MOD_EXERCISE, CommonData.STT_STOP, 0x00, 0x00);
                     }
                    startActivity(new Intent(Exercise_Activity.this, MainActivity.class));
                    Exercise_Activity.this.finish();
@@ -62,9 +63,13 @@ public class Exercise_Activity extends Activity {
 
                         if (event.getAction() == MotionEvent.ACTION_DOWN) {
                             if(bStart) {
-                                CommonData.dataProcess.sendCmd(0x00, CommonData.EXERCISECMD, CommonData.STOPSTT, 0x00, 0x00);
+//                                CommonData.dataProcess.sendCmd(0x00, CommonData.EXERCISECMD, CommonData.STOPSTT, 0x00, 0x00);
+                                CommonData.dataProcess.sendCmd(0x00, CommonData.MOD_EXERCISE, CommonData.STT_STOP, 0x00, 0x00);
                                 tv_start.setTextColor(Black);
                                 tv_start.setBackground(dwPress);
+                                tv_end.setTextColor(Gray);
+                                tv_end.setBackground(dwDisable);
+                                bStart = false;
                             }
                         }
                         return false;
@@ -80,7 +85,9 @@ public class Exercise_Activity extends Activity {
                       bStart = true;
                       tv_start.setTextColor(Gray);
                       tv_start.setBackground(dwDisable);
-                      CommonData.dataProcess.sendCmd(0x00, CommonData.EXERCISECMD, CommonData.STARTSTT, CommonData.EXERCISE_TIME, 0x00);
+                      tv_end.setTextColor(Black);
+                      tv_end.setBackground(dwPress);
+                      CommonData.dataProcess.sendCmd(0x00, CommonData.MOD_EXERCISE, CommonData.STT_START,0x00, 0x00);
                   }
                 }
                 return false;
@@ -89,7 +96,7 @@ public class Exercise_Activity extends Activity {
     }
     public void onBackPressed() {
         if(bStart) {
-            CommonData.dataProcess.sendCmd(0x00, CommonData.EXERCISECMD, CommonData.STOPSTT, 0x00, 0x00);
+            CommonData.dataProcess.sendCmd(0x00, CommonData.MOD_EXERCISE, CommonData.STT_STOP, 0x00, 0x00);
         }
         Log.i("Exercsise", "back");
         startActivity(new Intent(Exercise_Activity.this, MainActivity.class));

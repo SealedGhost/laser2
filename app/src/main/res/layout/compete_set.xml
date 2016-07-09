@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent" android:layout_height="match_parent"
     android:background="@drawable/model_main"
@@ -7,42 +7,55 @@
 
     <TextView
         android:id="@+id/tv_gameset"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
+        android:layout_width="160dp"
+        android:layout_height="60dp"
+        android:background="@drawable/game_set"
+        android:gravity="center"
         android:text="@string/gameset"
         android:textColor="#ffffff"
-        android:textSize="60sp"
+        android:textSize="30sp"
         android:layout_marginLeft="30dp"
         android:layout_marginTop="30dp" />
 
-    <TextView
-        android:id="@+id/tv_gametime"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="游戏时间 :"
-        android:textColor="#ffffff"
-        android:textSize="50sp"
-        android:layout_gravity="center_vertical" />
-
     <Spinner
         android:id="@+id/sp_timeset"
-        android:layout_width="201dp"
-        android:layout_height="wrap_content"
+        android:layout_width="180dp"
+        android:layout_height="80dp"
+
 
         android:background="@drawable/spinner"
+        android:layout_marginTop="20dp"
+       android:layout_below="@+id/tv_gametime"
+       android:layout_alignStart="@+id/tv_gametime"
+        android:layout_alignEnd="@+id/tv_gametime"/>
+
+    <TextView
+        android:id="@+id/tv_gametime"
+        android:layout_width="180dp"
+        android:layout_height="60dp"
+        android:text="游戏时间"
+        android:gravity="center"
+        android:textColor="#000000"
+        android:textSize="40sp"
+        android:layout_toEndOf="@+id/tv_gamereturn"
         android:layout_gravity="center_vertical"
-        android:layout_marginLeft="10dp" />
+        android:layout_below="@+id/tv_gamereturn"
+        android:layout_marginTop="120dp"
+        android:background="@drawable/time_set"
+
+        />
 
     <TextView
         android:id="@+id/tv_gamereturn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/back" />
+        android:layout_width="160dp"
+        android:layout_height="60dp"
+        android:background="@drawable/back"
+        android:layout_alignTop="@+id/tv_gameset"
+        android:layout_toEndOf="@+id/tv_gameset" />
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
         android:text="@string/confirm"
         android:id="@+id/tv_gameconfirm"
         android:background="@drawable/model"
@@ -51,6 +64,9 @@
 
         android:textSize="30sp"
         android:layout_marginRight="30dp"
-        android:layout_gravity="center_vertical" />
+        android:layout_marginBottom="30dp"
+        android:layout_gravity="center_vertical"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true" />
 
-</LinearLayout>
+</RelativeLayout>

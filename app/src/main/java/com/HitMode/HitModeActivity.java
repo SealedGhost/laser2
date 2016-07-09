@@ -129,13 +129,17 @@ public class HitModeActivity extends Activity {
                                 arrhitscores[i] = "0";
                             }
                             adapterRecycler.notifyDataSetChanged();
-                            CommonData.dataProcess.sendCmd(0x00, CommonData.HITCMD, CommonData.STARTSTT, iTime, 0x00);
+//                            CommonData.dataProcess.sendCmd(0x00, CommonData.HITCMD, CommonData.STARTSTT, iTime, 0x00);
+                            CommonData.dataProcess.sendCmd(0x00, CommonData.MOD_HIT, CommonData.STT_START, iTime, 0x00);
                             tv_start.setBackground(dwDisable);
                             tv_start.setTextColor(Gray);
+
                             tv_continue.setBackground(dwPress);
-                            tv_continue.setTextColor(Black);
+                            tv_continue.setTextColor(Gray);
+
                             tv_stop.setBackground(dwDisable);
-                            tv_stop.setTextColor(Gray);
+                            tv_stop.setTextColor(Black);
+
                             tv_end.setBackground(dwPress);
                             tv_end.setTextColor(Black);
                             bStart = true;
@@ -143,7 +147,8 @@ public class HitModeActivity extends Activity {
                         }
                     case STOP:
                         if(bStart&&!bStop) {
-                            CommonData.dataProcess.sendCmd(0x00, CommonData.HITCMD, CommonData.PAUSESTT, 0x00, 0x00);
+//                            CommonData.dataProcess.sendCmd(0x00, CommonData.HITCMD, CommonData.PAUSESTT, 0x00, 0x00);
+                            CommonData.dataProcess.sendCmd(0x00, CommonData.MOD_HIT, CommonData.STT_PAUSE, 0x00, 0x00);
                             tv_stop.setBackground(dwDisable);
                             tv_stop.setTextColor(Gray);
                             tv_continue.setBackground(dwPress);
@@ -158,14 +163,16 @@ public class HitModeActivity extends Activity {
                             tv_stop.setTextColor(Black);
                             tv_continue.setBackground(dwDisable);
                             tv_continue.setTextColor(Gray);
-                            CommonData.dataProcess.sendCmd(0x00, CommonData.HITCMD, CommonData.RESUMESTT, 0x00, 0x00);
+//                            CommonData.dataProcess.sendCmd(0x00, CommonData.HITCMD, CommonData.RESUMESTT, 0x00, 0x00);
+                            CommonData.dataProcess.sendCmd(0x00, CommonData.MOD_HIT, CommonData.STT_RESUME, 0x00, 0x00);
                             bStop = false;
                         }
                         break;
                     case RETURN:
                         if(bStart)
                         {
-                            CommonData.dataProcess.sendCmd(0x00, CommonData.HITCMD, CommonData.STOPSTT, 0x00, 0x00);
+//                            CommonData.dataProcess.sendCmd(0x00, CommonData.HITCMD, CommonData.STOPSTT, 0x00, 0x00);
+                            CommonData.dataProcess.sendCmd(0x00, CommonData.MOD_HIT, CommonData.STT_STOP, 0x00, 0x00);
                         }
                         Intent intent = new Intent(HitModeActivity.this, Hit_Activity.class);
                         startActivity(intent);
@@ -174,7 +181,8 @@ public class HitModeActivity extends Activity {
                     case END:
                         if(bStart)
                         {
-                            CommonData.dataProcess.sendCmd(0x00, CommonData.HITCMD, CommonData.STOPSTT, 0x00, 0x00);
+//                            CommonData.dataProcess.sendCmd(0x00, CommonData.HITCMD, CommonData.STOPSTT, 0x00, 0x00);
+                            CommonData.dataProcess.sendCmd(0x00, CommonData.MOD_HIT, CommonData.STT_STOP, 0x00, 0x00);
                             bStart = false;
                             tv_start.setBackground(dwPress);
                             tv_start.setTextColor(Black);
@@ -223,7 +231,7 @@ public class HitModeActivity extends Activity {
     public void onBackPressed() {
         if(bStart)
         {
-            CommonData.dataProcess.sendCmd(0x00, CommonData.HITCMD, CommonData.STOPSTT, 0x00, 0x00);
+            CommonData.dataProcess.sendCmd(0x00, CommonData.MOD_HIT, CommonData.STT_STOP, 0x00, 0x00);
         }
         Intent intent = new Intent(HitModeActivity.this, Hit_Activity.class);
         startActivity(intent);
